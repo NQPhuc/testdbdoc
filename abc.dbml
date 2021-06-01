@@ -1,0 +1,31 @@
+Project first_project {
+  database_type: 'PostgreSQL'
+  Note: '''
+    # Ecommerce Database
+    **markdown content here**
+  '''
+}
+
+table user{
+  id integer [primary key, increment]
+  name varchar
+}
+
+table order{
+  oid integer [pk, increment]
+  uid integer [pk]
+  pid integer [pk]
+}
+
+table product{
+  id integer [pk]
+  description varchar [default: "defVal", unique, not null]
+}
+
+table employee{
+  id integer [pk]
+  name varchar [ref: - user.name]
+}
+
+ref: user.id < order.uid [delete: cascade, update: no action]
+ref: product.id < order.pid
